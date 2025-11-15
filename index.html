@@ -8,15 +8,52 @@
     
     <style>
         body { font-family: sans-serif; padding: 20px; }
-        /* スライダーの見た目を調整 */
-        input[type="range"] {
+        input[type="range"] { width: 80%; margin-top: 20px; }
+
+        /* RMS可視化バーのスタイル */
+        #rmsBarContainer {
             width: 80%;
-            margin-top: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
         }
-     
+        #rmsBar {
+            width: 0%;
+            height: 100%;
+            background-color: #8a2be2;
+            transition: width 0.05s linear;
+        }
     </style>
 </head>
 <body>
+    <h2>タイムストレッチ・スライダー</h2>
+    <p>基準音源: kanon_1.20x.wav</p>
+
+    <button id="playButton" disabled>読み込み中...</button>
+    <p>
+        <input 
+            type="range" 
+            id="speedSlider" 
+            min="1.20" 
+            max="1.45" 
+            step="0.001" 
+            value="1.20"
+            disabled
+        >
+    </p>
+    <p>現在の速度: <span id="speedDisplay">1.200</span>x</p>
+
+    <hr>
+
+    <p style="margin-top: 20px;">
+        現在の揺れ (SD): <span id="rmsValueDisplay">0.00</span>
+    </p>
+    <div id="rmsBarContainer">
+        <div id="rmsBar"></div>
+    </div>
     <script src="audio.js"></script>
 </body>
 </html>
