@@ -31,7 +31,12 @@ fetch(baseAudioFile)
         
         Tone.setContext(audioContext); 
 
-        pitchShift = new Tone.PitchShift({ pitch: 0 }).toDestination();
+        // ★修正: windowSize パラメータを追加
+        pitchShift = new Tone.PitchShift({
+            pitch: 0,
+            windowSize: 0.4 // デフォルトは 0.1 (100ms)
+        }).toDestination();
+        
         player = new Tone.Player(audioBuffer).connect(pitchShift);
         player.loop = true;
 
@@ -43,7 +48,6 @@ fetch(baseAudioFile)
         console.error('オーディオ読み込み失敗:', err);
         playBtn.textContent = 'エラー';
     });
-
 
 // === 4. 再生/停止 コントロール (Tone.js版・★修正) ===
 
